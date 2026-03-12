@@ -1,110 +1,121 @@
-# NYC-Taxi-Demand-and-Rider-Behavior-Analysis
+# NYC Taxi Demand and Rider Behavior Analysis
 
-Data analysis and predictive modeling project using 2023 NYC Yellow Taxi trip data to study rider behavior, taxi demand, trip duration, fare prediction, and tipping patterns.
+This repository presents an exploratory and modeling-based analysis of New York City yellow taxi trips using a January 2023 trip sample and the NYC taxi zone lookup table. The project combines descriptive analysis, route visualization, and baseline predictive modeling to study how trip timing, distance, location, fare structure, and passenger behavior relate to taxi demand, fare amounts, trip duration, and tipping outcomes.
 
-## CMSE 202 Group 4 Project
+The work originated as a course project, but this repository has been revised to read as a portfolio-quality case study with clearer setup instructions, tighter scope, and more explicit discussion of methodological limits.
 
-## Members:
+## Project Overview
+
+The central question is:
+
+How do rider behavior patterns across time, location, and trip characteristics relate to taxi demand, trip duration, fares, and tipping outcomes in New York City?
+
+The analysis is organized into five components:
+
+1. Origin-destination route exploration with network visualizations
+2. Time-of-day and day-of-week demand analysis
+3. Tip likelihood classification
+4. Fare amount regression
+5. Trip duration regression
+
+## Dataset
+
+This repository uses two files stored at the project root:
+
+- `taxi.csv`: January 2023 NYC yellow taxi trip sample used across the notebooks
+- `taxi_zones.csv`: taxi zone lookup table for interpreting pickup and dropoff location IDs
+
+Important scope note:
+
+- The notebook explicitly filters the trip data to January 1 through January 14, 2023.
+- Results should therefore be interpreted as a short-window case study, not a full-year or citywide annual trend analysis.
+- `taxi.csv` is tracked with Git LFS because of its size.
+
+If the large dataset does not appear after cloning, run:
+
+```bash
+git lfs install
+git lfs pull
+```
+
+## Methods Used
+
+- Data cleaning with `pandas`
+- Descriptive demand analysis by hour, day, and weekday/weekend split
+- Directed network graphs for popular origin-destination routes
+- Ordinary least squares regression for fare modeling
+- Linear regression for trip-duration modeling
+- Logistic regression with ROC analysis for tip classification
+- Visualization with `matplotlib` and `seaborn`
+
+## Key Findings
+
+- Trip demand varies meaningfully by hour of day and by weekday versus weekend periods within the January 1-14 window.
+- The most common routes cluster around a relatively small set of zone pairs, which makes the route network highly concentrated rather than evenly distributed across the city.
+- Fare amount is strongly associated with trip distance in this sample, and the fare regression achieves a relatively high in-sample fit.
+- Trip duration is moderately predictable from a small set of trip-level features, with distance contributing the strongest linear signal among the variables used.
+- Tip prediction is weak with the current feature set. The notebook's baseline logistic regression performs only slightly above chance, which suggests that tipping behavior is not well captured by distance, fare amount, and passenger count alone.
+
+## Limitations
+
+- The analysis window covers only January 1-14, 2023, so it cannot capture broader seasonal demand patterns.
+- The notebooks use a shortened working sample rather than the complete TLC trip record universe, which limits generalizability.
+- Several models use simple linear specifications and minimally engineered features, so the results are better interpreted as baseline explanatory models than production-grade predictive systems.
+- Categorical variables such as payment type and location IDs are treated simplistically in parts of the analysis, which can distort interpretation when those variables are encoded as ordinary numeric values.
+- Reported findings should be read as evidence from this sample and this time window, not as definitive claims about all NYC taxi behavior.
+
+## Repository Structure
+
+```text
+.
+|-- README.md
+|-- SETUP.md
+|-- requirements.txt
+|-- ProjectGroup4Final.ipynb
+|-- Project_parts_125.ipynb
+|-- Project_part_3.ipynb
+|-- ProjectDiscussionAndPlanning.md
+|-- Group 4 Project Report.pdf
+|-- taxi.csv
+`-- taxi_zones.csv
+```
+
+Notebook roles:
+
+- `ProjectGroup4Final.ipynb`: recommended notebook for review; contains the integrated final analysis
+- `Project_parts_125.ipynb`: earlier project stage covering sections 1, 2, 4, and 5
+- `Project_part_3.ipynb`: earlier project stage focused on section 3 plus shared preprocessing
+
+## How to Run the Project
+
+1. Clone the repository.
+2. Make sure Git LFS is installed, then pull the large dataset if needed.
+3. Create a Python virtual environment.
+4. Install dependencies with `pip install -r requirements.txt`.
+5. Open `ProjectGroup4Final.ipynb` in JupyterLab or Jupyter Notebook.
+6. Run the notebook from top to bottom from the repository root so file paths resolve correctly.
+
+For additional setup details, see `SETUP.md`.
+
+## Reproducibility Notes
+
+- The notebooks expect both CSV files to remain in the repository root.
+- Generated charts are mostly displayed inline rather than saved to a structured output directory.
+- Some notebook outputs are verbose because the original project preserved intermediate displays for class submission purposes.
+
+## Recommended Next Improvements
+
+- Encode categorical predictors properly for predictive modeling
+- Add holdout metrics such as RMSE, MAE, precision, recall, F1, and confusion matrices directly in the notebook narrative
+- Separate exploratory analysis from predictive modeling into cleaner notebook sections
+- Move reusable preprocessing into Python modules for easier reruns and testing
+
+## Authors
+
+Original project contributors:
+
 - Rafin Ahon
 - Rashik Alahi
 - Gunnar Austin
 - Connor Curtis
 - Emily Evans
-
-## Main Research Question
-### How do rider behavior patterns across time, location, and trip characteristics- shape taxi demand, trip duration, fares, and tipping outcomes in New York City?
-
----
-
-## Team Members and Assigned Subtopics
-
-Each team member was responsible for writing the code and analysis for their assigned subtopic. Below is the breakdown:
-
-### 1. Connor Curtis
-**Subtopic:** Investigating New York Taxi Traffic via Network Graphing/Modeling  
-
-**Description of Code and Contributions:**  
-
-<u>My Contributions:</u>
-
-I found, filtered and downloaded the data set for our group to use. Additionally, I loaded the main data set into our workspace (taxi.csv) and performed some cleaning by altering some columns into a more usable form, deleting unnecessary columns, and shortening the data due to it having millions of rows. Additionally, I set up a workspace for each group member to use within the notebook in order to help us stay organized. 
-
-Being responsible for sub-topic #1, I am also responsible for all of the code within that section pertaining to network graphing which includes finding and downloading the secondary data set (taxi_zones.csv). Thus, I am also responsible for the portions of the presentation and the written report pertaining to my subtopic, as well as some of the introduction and conclusion in those sections.
-
-Outside of our notebook and the code itself, I helped come up with the different sub-topics that each group member could take on in order to gain insights on our main question. I also constantly communicated with group members trying to set up schedules and checkpoints in order for a more cohesive and smooth group experience. Finally I helped create the basic layout for this README file as well as our presentation and report.
-
-<u>How to run code:</u>
-
-1. Open the Project.ipynb notebook in Jupyter Notebook or JupyterLab.
-2. Run each cell from top to bottom.
-3. There are no custom functions. All visualizations are generated directly from the cells as written.
-
-
----
-
-### 2. Rafin Ahon
-**Subtopic:** Time-of-Day / Day-of-Week Demand Analysis  
-
-**Description of Code and Contributions:**  
-For this part of the project, I analyzed the second question. I intended to explore how taxi demand changes across different hours and days to understand rider behavior patterns. My work focused on transforming timestamp data into usable time-based features and generating visualizations that reveal clear daily and weekly trends. My specific contributions include:
-
-- Created time-based variables by converting raw pickup and dropoff timestamps into hour, day, and weekday columns to make temporal patterns easier to analyze.
-
-- Generated multiple visualizations- including hourly demand trends, weekday vs. weekend comparisons, daily trip totals, and a full heatmap showing hour-by-hour activity across the week.
-
-- Organized and documented all analysis in the updated Project.ipynb file, with exported graphs used directly in the final presentation.
-  
-My code uses pandas to clean and transform the timestamp column into hour, day, and weekday features, numpy for basic numeric calculations, and matplotlib to generate the four visualizations for my section. The analysis relies on grouping the data with groupby() to measure trip counts across different time intervals. These steps allowed our group to clearly see how rider activity fluctuates throughout the day and across the week, providing a strong foundation for understanding temporal demand patterns.
-
-Instructions on running my code: 
-After the dataset is loaded in Part 1, my section runs by continuing through the remaining cells in the notebook. These cells create the time-based features (hour, day, weekday), compute the trip counts, and produce all visualizations for hourly trends, weekday vs. weekend patterns, daily totals, and the hour-by-weekday heatmap. All figures appear directly in the notebook and are also saved to the project folder automatically, with no extra setup required.
-
----
-
-### 3. Chowdhury Rashik E Alahi
-**Subtopic:** Tip likelihood logistic regression  
-
-**Description of Code and Contributions:**  
-For my part of the project, I focused on two modeling questions: predicting taxi fare amounts and analyzing the likelihood that a passenger leaves a tip. My work centered on preparing the relevant numerical features, running regression models, and generating the visualizations used in our final presentation. My specific contributions include:
-
-- Cleaned and converted key variables such as trip distance, fare amount, passenger count, and tip amount into usable numeric formats, while removing invalid or extreme values.
-
-- Built a multiple linear regression model to estimate fare amounts and created the “Fare vs Trip Distance” regression scatterplot to illustrate the model’s relationship between distance and pricing.
-
-- Developed a logistic regression model to predict whether a passenger tips, including generating the binary tip variable, sampling the dataset for efficient training, and producing the final ROC curve used in the presentation.
-
-- Documented all steps clearly in the Project.ipynb file and simplified code blocks for readability, ensuring that visualizations and outputs are easy for the entire team to interpret and reference.
-
-My analysis uses pandas for cleaning and preparing the dataset, numpy for numeric handling, seaborn and matplotlib for all visualizations, and scikit-learn for both regression models. This workflow allowed us to explore how well trip-level features can explain fare pricing and tipping behavior, ultimately revealing that distance is highly predictable while tipping remains much harder to model.
-
-**Instructions on running my code:**
-Once the main dataset is loaded and cleaned in Part 1, my sections can be executed by running the subsequent cells in order. The fare prediction section automatically generates the distance–fare regression plot, while the tipping analysis produces the logistic regression output and the ROC curve. All figures render directly in the notebook and do not require any additional setup.
-
----
-
-### 4. [Member Name]
-**Subtopic:** [Subtopic #4 title]  
-
-**Description of Code and Contributions:**  
-[Describe code and contributions in this space]
-
----
-
-### 5. Gunnar Austin  
-**Subtopic:** Linear Regression Modeling of New York Taxi Trip Durations  
-
-**Description of Code and Contributions:**  
-
-<u>My Contributions:</u>
-
-I oversaw the creation of the regression framework that evaluates how different trip-related variables affect taxi ride duration in New York City. My work also involved preparing the dataset, which included converting data to numeric formats, eliminating erroneous or missing entries, and filtering out trips with extreme or implausible values. I structured the input variables for modeling and carried out the SKLearn regression procedure, which included dividing the data into training and testing subsets and computing the model’s R² value, intercept, and feature coefficients.
-
-Additionally, I created a secondary filtered dataset to remove extreme outliers that could distort visual interpretation. I computed median values for each predictor variable in order to isolate the effect of one variable at a time. I then generated a complete set of regression visualizations, with each plot comparing observed trip durations against the model-predicted regression line for a single feature while holding all other variables constant. This produced clear, interpretable graphics that form the basis for the analysis in my section of the report.
-
-Outside of the code itself, I contributed to discussions about the structure of the report and how each subtopic fits into the larger research question. I also communicated regularly with group members to coordinate code integration and ensure that updates were properly merged into the main branch.
-
-<u>How to run code:</u>
-
-1. Open the Project Group 4 .ipynb notebook in Jupyter Notebook or JupyterLab.  
-2. Run each cell sequentially from top to bottom.  
-3. All outputs, graphs, and regression lines are generated directly from the executed cells; no additional files or manual steps are required.
