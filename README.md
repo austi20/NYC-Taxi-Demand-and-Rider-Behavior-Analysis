@@ -105,9 +105,9 @@ For additional setup details, see `SETUP.md`.
 
 ## Recommended Next Improvements
 
-- Encode categorical predictors properly for predictive modeling
-- Add holdout metrics such as RMSE, MAE, precision, recall, F1, and confusion matrices directly in the notebook narrative
-- Separate exploratory analysis from predictive modeling into cleaner notebook sections
+- Add richer location and route features rather than relying mainly on trip-level numeric fields
+- Explore nonlinear models and regularization for better predictive performance
+- Separate exploratory analysis from predictive modeling into cleaner notebook sections or scripts
 - Move reusable preprocessing into Python modules for easier reruns and testing
 
 ## Authors
