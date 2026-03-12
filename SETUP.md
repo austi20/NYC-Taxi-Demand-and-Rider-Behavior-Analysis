@@ -20,10 +20,8 @@ If `taxi.csv` does not download automatically after cloning, run `git lfs instal
 ## Notebook Guide
 
 - `ProjectGroup4Final.ipynb`: final integrated notebook and the recommended entry point.
-- `Project_parts_125.ipynb`: earlier project stage covering sections 1, 2, 4, and 5.
-- `Project_part_3.ipynb`: earlier project stage focused on section 3 plus shared preprocessing.
 
-The earlier notebooks are retained for project history. For a clean portfolio review, start with `ProjectGroup4Final.ipynb`.
+For a clean portfolio review, start with `ProjectGroup4Final.ipynb`.
 
 ## Notes on Reproducibility
 

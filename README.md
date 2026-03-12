@@ -72,19 +72,14 @@ git lfs pull
 |-- SETUP.md
 |-- requirements.txt
 |-- ProjectGroup4Final.ipynb
-|-- Project_parts_125.ipynb
-|-- Project_part_3.ipynb
-|-- ProjectDiscussionAndPlanning.md
 |-- Group 4 Project Report.pdf
 |-- taxi.csv
 `-- taxi_zones.csv
 ```
 
-Notebook roles:
+Primary analysis artifact:
 
 - `ProjectGroup4Final.ipynb`: recommended notebook for review; contains the integrated final analysis
-- `Project_parts_125.ipynb`: earlier project stage covering sections 1, 2, 4, and 5
-- `Project_part_3.ipynb`: earlier project stage focused on section 3 plus shared preprocessing
 
 ## How to Run the Project
 
